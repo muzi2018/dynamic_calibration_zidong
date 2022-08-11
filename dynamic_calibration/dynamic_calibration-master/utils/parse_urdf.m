@@ -3,7 +3,7 @@ function robot = parse_urdf(file)
 % The function is tailored for UR robots: serial robots with 6 DOF
 % Modify it if you have  a robot with different degrees of freedom
 robot = xml2struct(file);
-no_dof = 6;
+no_dof = 4;
 
 % Extracting parameters of the robot
 for i = 1:no_dof

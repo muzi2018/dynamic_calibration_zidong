@@ -32,6 +32,7 @@ traj_par.q0 = deg2rad([0 -90 0 -90 0 0 ]');
 % Use different limit for positions for safety
 traj_par.q_min = -deg2rad([180  180  100   180  90   90]');
 traj_par.q_max =  deg2rad([180  0    100   0    90   90]');
+qd_max = deg2rad([5  5    5   5    5   90]');
 traj_par.qd_max = qd_max;
 traj_par.q2d_max = [2 1 1 1 1 2.5]';
 

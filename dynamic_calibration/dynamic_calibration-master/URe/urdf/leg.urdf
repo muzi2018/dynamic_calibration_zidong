@@ -1,0 +1,153 @@
+<robot name="legs">
+  <!-- ===== LEFT LEG ==== -->
+    <link name="L_HipRz">
+      <inertial>
+        <mass value="0.30"/>
+        <origin xyz="0.0 0.00 -0.04293"/>
+        <inertia ixx="0.003735" ixy="0.0" ixz="0.0" iyy="0.01391" iyz="0.0" izz="0.01355"/>
+      </inertial>
+      <visual>
+        <geometry>
+           <mesh filename="meshes_zidong_obj/R_HipRz.obj" scale="1 1 1"/>
+        </geometry>
+        <origin rpy="0 0 0.0" xyz="0. 0. 0"/>
+      </visual>
+    </link>
+    <joint name="L_HipRz_to_L_HipRx" type="revolute">
+     <axis xyz="1 0 0"/>
+     <origin rpy="0 0 0" xyz="-0.041 0.0 -0.0885"/>
+     <parent link="L_HipRz"/>
+     <child link="L_HipRx"/>
+     <limit lower="-3" upper="3" effort="33.6" velocity="55" />
+    </joint>
+    <link name="L_HipRx">
+     <inertial>
+       <mass value="0.30"/>
+       <origin xyz="0.0 0.0 -0.01"/>
+       <inertia ixx="0.003735" ixy="0.0" ixz="0.0" iyy="0.01391" iyz="0.0" izz="0.01355"/>
+     </inertial>
+     <visual>
+       <geometry>
+          <mesh filename="meshes_zidong_obj/L_HipRx.obj" scale="1 1 1"/>
+       </geometry>
+       <origin rpy="0 -1.57 0.0" xyz="0. 0. 0"/>
+     </visual>
+    </link>
+
+
+
+  <joint name="L_HipRx_to_L_Thigh" type="revolute">
+    <axis xyz="0 1 0"/>
+    <origin rpy="0 0 0" xyz="0.065 0.0 0.0"/>
+    <parent link="L_HipRx"/>
+    <child link="L_Thigh"/>
+    <limit lower="-3" upper="3" effort="33.6" velocity="55" />
+  </joint>
+  <link name="L_Thigh">
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0.0 0.0 -0.10"/>
+      <inertia ixx="0.003735" ixy="0.0" ixz="0.0" iyy="0.01391" iyz="0.0" izz="0.01355"/>
+    </inertial>
+    <visual>
+        <geometry>
+          <mesh filename="meshes_zidong_obj/L_Thigh.obj" scale="1 1 1"/>
+        </geometry>
+      <origin rpy="0 1.57 -1.57" xyz="0.0 0.0 0.0"/>
+    </visual>
+  </link>
+
+
+
+  <joint name="L_Knee" type="revolute">
+    <axis xyz="0 1 0"/>
+    <origin rpy="0 0 0" xyz="0.0 -0.017875 -0.247"/>
+    <parent link="L_Thigh"/>
+    <child link="L_Shank"/>
+    <limit lower="-3" upper="3" effort="33.6" velocity="55" />
+  </joint>
+    <link name="L_Shank">
+      <inertial>
+        <mass value="0.70"/>
+        <origin xyz="-0.03416 -0.00075 -0.01"/>
+        <inertia ixx="0.003735" ixy="0.0" ixz="0.0" iyy="0.01391" iyz="0.0" izz="0.01355"/>
+      </inertial>
+      <visual>
+        <geometry>
+           <mesh filename="meshes_zidong_obj/L_LowerLeg3_drawing.obj" scale="1 1 1"/>
+        </geometry>
+        <origin rpy="1.57 1.57 0.0" xyz="0. 0. 0"/>
+      </visual>
+    </link>
+
+  <joint name="L_Ankle" type="revolute">
+    <axis xyz="0 1 0"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.247"/>
+    <parent link="L_Shank"/>
+    <child link="L_Foot"/>
+    <limit lower="-3" upper="3" effort="33.6" velocity="55" />
+  </joint>
+  <link name="L_Foot">
+    <inertial>
+      <mass value="0.30"/>
+      <origin xyz="0.0 0.0 -0.01"/>
+      <inertia ixx="0.003735" ixy="0.0" ixz="0.0" iyy="0.01391" iyz="0.0" izz="0.01355"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="meshes_zidong_obj/L_foot_drawing.obj" scale="1 1 1"/>
+      </geometry>
+      <origin rpy="1.57 1.57 0" xyz="0. 0. 0."/>
+    </visual>
+
+      <visual>
+          <geometry>
+              <sphere radius="0.001"/>
+          </geometry>
+          <origin xyz="0.125 0.0 -0.033" rpy="0 0 0"/>
+      </visual>
+      <collision>
+          <geometry>
+              <sphere radius="0.0"/>
+          </geometry>
+          <origin xyz="0.125 0.0 -0.033" rpy="0 0 0"/>
+      </collision>
+
+      <visual>
+          <geometry>
+              <sphere radius="0.001"/>
+          </geometry>
+          <origin xyz="-0.025 0.0 -0.033" rpy="0 0 0"/>
+      </visual>
+      <collision>
+          <geometry>
+              <sphere radius="0.0"/>
+          </geometry>
+          <origin xyz="-0.025 0.0 -0.033" rpy="0 0 0"/>
+      </collision>
+  </link>
+
+  <!--!!!!!!!!!!!!!!!!!!!!!transmission!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+  <transmission name="L_HipRz_to_L_HipRx-trans" type="transmission_interface/SimpleTransmission">
+          <actuator name="L_HipRz_to_L_HipRx-motor"/>
+          <joint name="L_HipRz_to_L_HipRx"/>
+          <mechanicalReduction>1</mechanicalReduction>
+  </transmission>
+  <transmission name="L_HipRx_to_L_Thigh-trans" type="transmission_interface/SimpleTransmission">
+          <actuator name="L_HipRx_to_L_Thigh-motor"/>
+          <joint name="L_HipRx_to_L_Thigh"/>
+          <mechanicalReduction>1</mechanicalReduction>
+  </transmission>
+  <transmission name="L_Knee-trans" type="transmission_interface/SimpleTransmission">
+          <actuator name="L_Knee-motor"/>
+          <joint name="L_Knee"/>
+          <mechanicalReduction>1</mechanicalReduction>
+  </transmission>
+  <transmission name="L_Ankle-trans" type="transmission_interface/SimpleTransmission">
+          <actuator name="L_Ankle-motor"/>
+          <joint name="L_Ankle"/>
+          <mechanicalReduction>1</mechanicalReduction>
+  </transmission>
+</robot>
+
+
