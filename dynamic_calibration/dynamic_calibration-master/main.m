@@ -12,7 +12,7 @@ path_to_urdf = 'ur10e.urdf';
 
 % Generate regressors for inverse dynamics of the robot, friction and load
 % Note that it might take some time
-generate_rb_regressor(path_to_urdf);
+% generate_rb_regressor(path_to_urdf);
 % generate_load_regressor(path_to_urdf);
 
 
@@ -22,7 +22,7 @@ generate_rb_regressor(path_to_urdf);
 
 
 % Perform QR decompostion in order to get base parameters of the robot
-include_motor_dynamics = 1;
+include_motor_dynamics = 0;
 [pi_lgr_base, baseQR] = base_params_qr(include_motor_dynamics);
 
 
@@ -38,7 +38,7 @@ path_to_est_data = 'ur-20_02_10-30sec_12harm.csv';      idxs = [635, 3510];
 % path_to_data = 'ur-20_02_05-20sec_8harm.csv';     idxs = [320, 2310];
 % path_to_data = 'ur-20_02_12-50sec_12harm.csv';    idxs = [355, 5090];
 sol = estimate_dynamic_params(path_to_est_data, idxs, ...
-                              drive_gains, baseQR, 'PC-OLS');
+                              drive_gains, baseQR, 'OLS');
 
                           
 % Validate estimated parameters

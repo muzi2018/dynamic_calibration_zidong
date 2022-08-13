@@ -90,8 +90,8 @@ function [pib_OLS, pifrctn_OLS] = ordinaryLeastSquareEstimation(Tau, Wb)
     % Function perfroms ordinary least squares estimation of parameters
     pi_OLS = (Wb'*Wb)\(Wb'*Tau);
 
-    pib_OLS = pi_OLS(1:36); % variables for base paramters
-    pifrctn_OLS = pi_OLS(37:end);
+    pib_OLS = pi_OLS(1:40); % variables for base paramters
+    pifrctn_OLS = pi_OLS(41:end);
 end
 
 

@@ -35,7 +35,8 @@ for i = 1:length(vldtnTrjctry.t)
     Ybi = Yi*baseQR.permutationMatrix(:,1:baseQR.numberOfBaseParameters);
     Yfrctni = frictionRegressor(qdi);
     
-    tau_msrd = horzcat(tau_msrd, diag(drvGains)*vldtnTrjctry.i(i,:)');
+%     tau_msrd = horzcat(tau_msrd, diag(drvGains)*vldtnTrjctry.i(i,:)');
+    tau_msrd = horzcat(tau_msrd, vldtnTrjctry.tau_des_fltrd(i,:)');
     tau_pred = horzcat(tau_pred, [Ybi Yfrctni]*[pi_b; pi_fr]);
 end
 

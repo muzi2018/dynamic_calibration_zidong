@@ -18,7 +18,7 @@ function [pi_lgr_base, baseQR] = base_params_qr(includeMotorDynamics)
 % ----------------------------------------------------------------------
 % Seed the random number generator based on the current time
 rng('shuffle');
-includeMotorDynamics=0;
+
 % ------------------------------------------------------------------------
 % Set limits on posistion and velocities
 % ------------------------------------------------------------------------
