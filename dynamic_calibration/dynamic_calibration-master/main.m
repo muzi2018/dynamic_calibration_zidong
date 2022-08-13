@@ -27,9 +27,9 @@ include_motor_dynamics = 1;
 
 
 % Estimate drive gains
-drive_gains = estimate_drive_gains(baseQR, 'PC-OLS');
+% drive_gains = estimate_drive_gains(baseQR, 'PC-OLS');
 % Or use those found in the paper by De Luca
-% drive_gains = [14.87; 13.26; 11.13; 10.62; 11.03; 11.47]; 
+drive_gains = [14.87; 13.26; 11.13; 10.62; 11.03; 11.47]; 
 
 
 % Estimate dynamic parameters
