@@ -14,3 +14,10 @@ drive_gains = [14.87; 13.26; 11.13; 10.62; 11.03; 11.47];
 
 sol = estimate_dynamic_params_leg(path_to_est_data, idxs, ...
                               drive_gains, baseQR, 'OLS');
+                          
+load('path_to_val_data.mat');
+idxs = [700, 4200];
+rre = validate_dynamic_params_leg(path_to_val_data, idxs, ...
+                              drive_gains, baseQR, sol.pi_b, sol.pi_fr);
+                 
+                          
