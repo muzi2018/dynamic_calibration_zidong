@@ -18,7 +18,7 @@ path_to_urdf = 'ur10e.urdf';
 
 % Run tests
 % test_rb_inverse_dynamics()
-test_base_params()
+% test_base_params()
 
 
 % Perform QR decompostion in order to get base parameters of the robot
@@ -48,7 +48,8 @@ rre = validate_dynamic_params(path_to_val_data, idxs, ...
                               drive_gains, baseQR, sol.pi_b, sol.pi_fr)
 
 
-
+E1=baseQR.permutationMatrix(:,1:baseQR.numberOfBaseParameters);
+pi=E1*sol.pi_b;
 
 
 
