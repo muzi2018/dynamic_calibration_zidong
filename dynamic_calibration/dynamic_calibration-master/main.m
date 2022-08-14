@@ -12,7 +12,7 @@ path_to_urdf = 'ur10e.urdf';
 
 % Generate regressors for inverse dynamics of the robot, friction and load
 % Note that it might take some time
-% generate_rb_regressor(path_to_urdf);
+generate_rb_regressor(path_to_urdf);
 % generate_load_regressor(path_to_urdf);
 
 
