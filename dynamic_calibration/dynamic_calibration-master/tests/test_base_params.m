@@ -10,7 +10,7 @@ ur10 = parse_urdf(path_to_urdf);
 no_links = 6;
 
 % Perform QR decompostions
-include_motor_dynamics = 1;
+include_motor_dynamics = 0;
 [~, baseQR] = base_params_qr(include_motor_dynamics);
 
 bb = baseQR.numberOfBaseParameters;

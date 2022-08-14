@@ -18,7 +18,7 @@ path_to_urdf = 'ur10e.urdf';
 
 % Run tests
 % test_rb_inverse_dynamics()
-% test_base_params()
+test_base_params()
 
 
 % Perform QR decompostion in order to get base parameters of the robot
