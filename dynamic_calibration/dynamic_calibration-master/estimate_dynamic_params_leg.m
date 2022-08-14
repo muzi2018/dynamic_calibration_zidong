@@ -69,7 +69,7 @@ end
 % Local functions
 function [Tau, Wb] = buildObservationMatrices(idntfcnTrjctry, baseQR, drvGains)
     % The function builds observation matrix for UR10E
-    E1 = baseQR.permutationMatrix(:,1:baseQR.numberOfBaseParameters);
+    
 
     Wb = []; Tau = []; 
     for i = 1:1:length(idntfcnTrjctry.time)
@@ -77,7 +77,7 @@ function [Tau, Wb] = buildObservationMatrices(idntfcnTrjctry, baseQR, drvGains)
                                          idntfcnTrjctry.qd(i,:)',...
                                          idntfcnTrjctry.q2d(i,:)');
         
-        Ybi = Yi*E1;
+        Ybi = Yi;
 
         Wb = vertcat(Wb, Ybi);
         Tau = vertcat(Tau, idntfcnTrjctry.u(i,:)');
