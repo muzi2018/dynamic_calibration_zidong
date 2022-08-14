@@ -29,8 +29,7 @@ function sol = estimate_dynamic_params_leg(path_to_data, idx, drvGains, baseQR, 
 % them result in slightly different dynamic parameters. Some of them
 % describe the dynamics better than others.
 % ------------------------------------------------------------------------
-idntfcnTrjctry = parseURData(path_to_data, idx(1), idx(2));
-idntfcnTrjctry = filterData(idntfcnTrjctry);
+idntfcnTrjctry = path_to_data;
 
 % -------------------------------------------------------------------
 % Generate Regressors based on data
@@ -55,7 +54,7 @@ end
 % Statistical analysis
 % -----------------------------------------------------------------
 % unbiased estimation of the standard deviation
-sqrd_sgma_e = norm(Tau - Wb*[sol.pi_b; sol.pi_fr], 2)^2/...
+sqrd_sgma_e = norm(Tau - Wb*sol.pi_b, 2)^2/...
                 (size(Wb, 1) - size(Wb, 2));
             
 % the covariance matrix of the estimation error
@@ -73,15 +72,15 @@ function [Tau, Wb] = buildObservationMatrices(idntfcnTrjctry, baseQR, drvGains)
     E1 = baseQR.permutationMatrix(:,1:baseQR.numberOfBaseParameters);
 
     Wb = []; Tau = []; 
-    for i = 1:1:length(idntfcnTrjctry.t)
-         Yi = regressorWithMotorDynamics(idntfcnTrjctry.q(i,:)',...
-                                         idntfcnTrjctry.qd_fltrd(i,:)',...
-                                         idntfcnTrjctry.q2d_est(i,:)');
-        Yfrctni = frictionRegressor(idntfcnTrjctry.qd_fltrd(i,:)');
-        Ybi = [Yi*E1, Yfrctni];
+    for i = 1:1:length(idntfcnTrjctry.time)
+         Yi = full_regressor_leg(idntfcnTrjctry.q(i,:)',...
+                                         idntfcnTrjctry.qd(i,:)',...
+                                         idntfcnTrjctry.q2d(i,:)');
+        
+        Ybi = Yi*E1;
 
         Wb = vertcat(Wb, Ybi);
-        Tau = vertcat(Tau, diag(drvGains)*idntfcnTrjctry.i_fltrd(i,:)');
+        Tau = vertcat(Tau, idntfcnTrjctry.u(i,:)');
     end
 end
 
@@ -90,8 +89,8 @@ function [pib_OLS, pifrctn_OLS] = ordinaryLeastSquareEstimation(Tau, Wb)
     % Function perfroms ordinary least squares estimation of parameters
     pi_OLS = (Wb'*Wb)\(Wb'*Tau);
 
-    pib_OLS = pi_OLS(1:40); % variables for base paramters
-    pifrctn_OLS = pi_OLS(41:end);
+    pib_OLS = pi_OLS; % variables for base paramters
+    pifrctn_OLS=[];
 end
 
 

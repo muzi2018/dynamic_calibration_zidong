@@ -7,3 +7,10 @@ path_to_urdf = 'leg.urdf';
 % Perform QR decompostion in order to get base parameters of the robot
 include_motor_dynamics = 0;
 [pi_lgr_base, baseQR] = base_params_qr_leg(include_motor_dynamics);
+path_to_est_data=struct();
+load('path_to_est_data.mat');
+idxs = [635, 3510];
+drive_gains = [14.87; 13.26; 11.13; 10.62; 11.03; 11.47]; 
+
+sol = estimate_dynamic_params_leg(path_to_est_data, idxs, ...
+                              drive_gains, baseQR, 'OLS');
