@@ -3,7 +3,6 @@ clear all; close all; clc;
 % Define path to a urdf file
 path_to_urdf = 'ur10e.urdf';
 
-
 % Generate functions for dynamics based on Lagrange method
 % Note that it might take some time
 % generate_rb_dynamics(path_to_urdf);
@@ -18,7 +17,7 @@ path_to_urdf = 'ur10e.urdf';
 
 % Run tests
 % test_rb_inverse_dynamics()
-% test_base_params()
+test_base_params()
 
 
 % Perform QR decompostion in order to get base parameters of the robot
