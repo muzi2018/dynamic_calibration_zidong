@@ -3,7 +3,7 @@ clear all; close all; clc;
 % Define path to a urdf file
 path_to_urdf = 'leg.urdf';
 % generate_legs_regressor(path_to_urdf);  
-
+date=parse_urdf(path_to_urdf);
 % Perform QR decompostion in order to get base parameters of the robot
 include_motor_dynamics = 0;
 [pi_lgr_base, baseQR] = base_params_qr_leg(include_motor_dynamics);
@@ -21,7 +21,8 @@ rre = validate_dynamic_params_leg(path_to_val_data, idxs, ...
                               drive_gains, baseQR, sol.pi_b, sol.pi_fr);
 % E1=baseQR.permutationMatrix(:,1:baseQR.numberOfBaseParameters);
 % pi=E1*sol.pi_b;
-
-                        
+baseQR.pi1(1)=1;
+pi_lgr_base = baseQR.pi1 + beta*baseQR.pi2;
+       
                  
                           

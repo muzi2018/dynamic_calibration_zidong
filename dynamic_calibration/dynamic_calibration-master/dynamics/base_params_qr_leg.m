@@ -121,5 +121,7 @@ baseQR.numberOfBaseParameters = bb;
 baseQR.permutationMatrix = E;
 baseQR.beta = beta;
 baseQR.motorDynamicsIncluded = includeMotorDynamics;
+baseQR.pi1=pi1;
+baseQR.pi2=pi2;
 
 
